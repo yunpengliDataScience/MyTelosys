@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Telosys Database Repository --><root>
+    <tableList databaseId="0" databaseName="HR" databaseProductName="Oracle" generation="2024-06-08 13:08:26">
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="Countries" name="COUNTRIES" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="COUNTRY_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="2" dbTypeName="CHAR" inputType="text" javaName="countryId" javaType="java.lang.String" jdbcTypeCode="1" label="Country id" maxLength="2" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="COUNTRY_NAME" dbNotNull="false" dbPosition="2" dbSize="60" dbTypeName="VARCHAR2" inputType="text" javaName="countryName" javaType="java.lang.String" jdbcTypeCode="12" label="Country name" maxLength="60" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="REGION_ID" dbNotNull="false" dbPosition="3" dbSize="0" dbTypeName="NUMBER" inputType="number" javaName="regionId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Region id" notNull="false" selected="true"/>
+            <fk name="COUNTR_REG_FK">
+                <fkcol colname="REGION_ID" colref="REGION_ID" deferrable="7" deleterule="1" sequence="1" tablename="COUNTRIES" tableref="REGIONS" updaterule="0"/>
+            </fk>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="LOC_C_ID_FK" id="LINK_FK_LOC_C_ID_FK_I" inverseSideOf="LINK_FK_LOC_C_ID_FK_O" javaName="listOfLocations" javaType="unused" joinTableName="" mappedBy="countries" optional="" owningSide="false" sourceTableName="COUNTRIES" targetEntity="Locations" targetTableName="LOCATIONS" used="true"/>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="COUNTR_REG_FK" id="LINK_FK_COUNTR_REG_FK_O" inverseSideOf="" javaName="regions" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="COUNTRIES" targetEntity="Regions" targetTableName="REGIONS" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="REGION_ID" nullable="true" referencedColumnName="REGION_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+        </table>
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="Departments" name="DEPARTMENTS" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="DEPARTMENT_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="4" dbTypeName="NUMBER" inputType="number" javaName="departmentId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Department id" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="DEPARTMENT_NAME" dbNotNull="true" dbPosition="2" dbSize="30" dbTypeName="VARCHAR2" inputType="text" javaName="departmentName" javaType="java.lang.String" jdbcTypeCode="12" label="Department name" maxLength="30" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="MANAGER_ID" dbNotNull="false" dbPosition="3" dbSize="6" dbTypeName="NUMBER" inputType="number" javaName="managerId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Manager id" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="LOCATION_ID" dbNotNull="false" dbPosition="4" dbSize="4" dbTypeName="NUMBER" inputType="number" javaName="locationId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Location id" notNull="false" selected="true"/>
+            <fk name="DEPT_LOC_FK">
+                <fkcol colname="LOCATION_ID" colref="LOCATION_ID" deferrable="7" deleterule="1" sequence="1" tablename="DEPARTMENTS" tableref="LOCATIONS" updaterule="0"/>
+            </fk>
+            <fk name="DEPT_MGR_FK">
+                <fkcol colname="MANAGER_ID" colref="EMPLOYEE_ID" deferrable="7" deleterule="1" sequence="1" tablename="DEPARTMENTS" tableref="EMPLOYEES" updaterule="0"/>
+            </fk>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="DEPT_MGR_FK" id="LINK_FK_DEPT_MGR_FK_O" inverseSideOf="" javaName="employees" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="DEPARTMENTS" targetEntity="Employees" targetTableName="EMPLOYEES" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="MANAGER_ID" nullable="true" referencedColumnName="EMPLOYEE_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="EMP_DEPT_FK" id="LINK_FK_EMP_DEPT_FK_I" inverseSideOf="LINK_FK_EMP_DEPT_FK_O" javaName="listOfEmployees" javaType="unused" joinTableName="" mappedBy="departments" optional="" owningSide="false" sourceTableName="DEPARTMENTS" targetEntity="Employees" targetTableName="EMPLOYEES" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="JHIST_DEPT_FK" id="LINK_FK_JHIST_DEPT_FK_I" inverseSideOf="LINK_FK_JHIST_DEPT_FK_O" javaName="listOfJobHistory" javaType="unused" joinTableName="" mappedBy="departments" optional="" owningSide="false" sourceTableName="DEPARTMENTS" targetEntity="JobHistory" targetTableName="JOB_HISTORY" used="true"/>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="DEPT_LOC_FK" id="LINK_FK_DEPT_LOC_FK_O" inverseSideOf="" javaName="locations" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="DEPARTMENTS" targetEntity="Locations" targetTableName="LOCATIONS" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="LOCATION_ID" nullable="true" referencedColumnName="LOCATION_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+        </table>
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="Employees" name="EMPLOYEES" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="EMPLOYEE_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="6" dbTypeName="NUMBER" inputType="number" javaName="employeeId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Employee id" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="FIRST_NAME" dbNotNull="false" dbPosition="2" dbSize="20" dbTypeName="VARCHAR2" inputType="text" javaName="firstName" javaType="java.lang.String" jdbcTypeCode="12" label="First name" maxLength="20" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="LAST_NAME" dbNotNull="true" dbPosition="3" dbSize="25" dbTypeName="VARCHAR2" inputType="text" javaName="lastName" javaType="java.lang.String" jdbcTypeCode="12" label="Last name" maxLength="25" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="EMAIL" dbNotNull="true" dbPosition="4" dbSize="25" dbTypeName="VARCHAR2" inputType="text" javaName="email" javaType="java.lang.String" jdbcTypeCode="12" label="Email" maxLength="25" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="PHONE_NUMBER" dbNotNull="false" dbPosition="5" dbSize="20" dbTypeName="VARCHAR2" inputType="text" javaName="phoneNumber" javaType="java.lang.String" jdbcTypeCode="12" label="Phone number" maxLength="20" notNull="false" selected="true"/>
+            <column dateType="DT" dbComment="" dbDefaultValue="" dbName="HIRE_DATE" dbNotNull="true" dbPosition="6" dbSize="7" dbTypeName="DATE" inputType="" javaName="hireDate" javaType="java.util.Date" jdbcTypeCode="93" label="Hire date" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="JOB_ID" dbNotNull="true" dbPosition="7" dbSize="10" dbTypeName="VARCHAR2" inputType="text" javaName="jobId" javaType="java.lang.String" jdbcTypeCode="12" label="Job id" maxLength="10" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="SALARY" dbNotNull="false" dbPosition="8" dbSize="8" dbTypeName="NUMBER" inputType="number" javaName="salary" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Salary" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="COMMISSION_PCT" dbNotNull="false" dbPosition="9" dbSize="2" dbTypeName="NUMBER" inputType="number" javaName="commissionPct" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Commission pct" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="MANAGER_ID" dbNotNull="false" dbPosition="10" dbSize="6" dbTypeName="NUMBER" inputType="number" javaName="managerId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Manager id" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="DEPARTMENT_ID" dbNotNull="false" dbPosition="11" dbSize="4" dbTypeName="NUMBER" inputType="number" javaName="departmentId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Department id" notNull="false" selected="true"/>
+            <fk name="EMP_DEPT_FK">
+                <fkcol colname="DEPARTMENT_ID" colref="DEPARTMENT_ID" deferrable="7" deleterule="1" sequence="1" tablename="EMPLOYEES" tableref="DEPARTMENTS" updaterule="0"/>
+            </fk>
+            <fk name="EMP_JOB_FK">
+                <fkcol colname="JOB_ID" colref="JOB_ID" deferrable="7" deleterule="1" sequence="1" tablename="EMPLOYEES" tableref="JOBS" updaterule="0"/>
+            </fk>
+            <fk name="EMP_MANAGER_FK">
+                <fkcol colname="MANAGER_ID" colref="EMPLOYEE_ID" deferrable="7" deleterule="1" sequence="1" tablename="EMPLOYEES" tableref="EMPLOYEES" updaterule="0"/>
+            </fk>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="EMP_MANAGER_FK" id="LINK_FK_EMP_MANAGER_FK_I" inverseSideOf="LINK_FK_EMP_MANAGER_FK_O" javaName="listOfEmployees" javaType="unused" joinTableName="" mappedBy="employees" optional="" owningSide="false" sourceTableName="EMPLOYEES" targetEntity="Employees" targetTableName="EMPLOYEES" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="JHIST_EMP_FK" id="LINK_FK_JHIST_EMP_FK_I" inverseSideOf="LINK_FK_JHIST_EMP_FK_O" javaName="listOfJobHistory" javaType="unused" joinTableName="" mappedBy="employees" optional="" owningSide="false" sourceTableName="EMPLOYEES" targetEntity="JobHistory" targetTableName="JOB_HISTORY" used="true"/>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="EMP_MANAGER_FK" id="LINK_FK_EMP_MANAGER_FK_O" inverseSideOf="" javaName="employees" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="EMPLOYEES" targetEntity="Employees" targetTableName="EMPLOYEES" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="MANAGER_ID" nullable="true" referencedColumnName="EMPLOYEE_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="EMP_JOB_FK" id="LINK_FK_EMP_JOB_FK_O" inverseSideOf="" javaName="jobs" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="EMPLOYEES" targetEntity="Jobs" targetTableName="JOBS" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="JOB_ID" nullable="true" referencedColumnName="JOB_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="DEPT_MGR_FK" id="LINK_FK_DEPT_MGR_FK_I" inverseSideOf="LINK_FK_DEPT_MGR_FK_O" javaName="listOfDepartments" javaType="unused" joinTableName="" mappedBy="employees" optional="" owningSide="false" sourceTableName="EMPLOYEES" targetEntity="Departments" targetTableName="DEPARTMENTS" used="true"/>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="EMP_DEPT_FK" id="LINK_FK_EMP_DEPT_FK_O" inverseSideOf="" javaName="departments" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="EMPLOYEES" targetEntity="Departments" targetTableName="DEPARTMENTS" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="DEPARTMENT_ID" nullable="true" referencedColumnName="DEPARTMENT_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+        </table>
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="Jobs" name="JOBS" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="JOB_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="VARCHAR2" inputType="text" javaName="jobId" javaType="java.lang.String" jdbcTypeCode="12" label="Job id" maxLength="10" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="JOB_TITLE" dbNotNull="true" dbPosition="2" dbSize="35" dbTypeName="VARCHAR2" inputType="text" javaName="jobTitle" javaType="java.lang.String" jdbcTypeCode="12" label="Job title" maxLength="35" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="MIN_SALARY" dbNotNull="false" dbPosition="3" dbSize="6" dbTypeName="NUMBER" inputType="number" javaName="minSalary" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Min salary" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="MAX_SALARY" dbNotNull="false" dbPosition="4" dbSize="6" dbTypeName="NUMBER" inputType="number" javaName="maxSalary" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Max salary" notNull="false" selected="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="EMP_JOB_FK" id="LINK_FK_EMP_JOB_FK_I" inverseSideOf="LINK_FK_EMP_JOB_FK_O" javaName="listOfEmployees" javaType="unused" joinTableName="" mappedBy="jobs" optional="" owningSide="false" sourceTableName="JOBS" targetEntity="Employees" targetTableName="EMPLOYEES" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="JHIST_JOB_FK" id="LINK_FK_JHIST_JOB_FK_I" inverseSideOf="LINK_FK_JHIST_JOB_FK_O" javaName="listOfJobHistory" javaType="unused" joinTableName="" mappedBy="jobs" optional="" owningSide="false" sourceTableName="JOBS" targetEntity="JobHistory" targetTableName="JOB_HISTORY" used="true"/>
+        </table>
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="JobHistory" name="JOB_HISTORY" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="EMPLOYEE_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="6" dbTypeName="NUMBER" inputType="number" javaName="employeeId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Employee id" notNull="true" selected="true"/>
+            <column dateType="DT" dbComment="" dbDefaultValue="" dbName="START_DATE" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="7" dbTypeName="DATE" inputType="" javaName="startDate" javaType="java.util.Date" jdbcTypeCode="93" label="Start date" notNull="true" selected="true"/>
+            <column dateType="DT" dbComment="" dbDefaultValue="" dbName="END_DATE" dbNotNull="true" dbPosition="3" dbSize="7" dbTypeName="DATE" inputType="" javaName="endDate" javaType="java.util.Date" jdbcTypeCode="93" label="End date" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="JOB_ID" dbNotNull="true" dbPosition="4" dbSize="10" dbTypeName="VARCHAR2" inputType="text" javaName="jobId" javaType="java.lang.String" jdbcTypeCode="12" label="Job id" maxLength="10" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="DEPARTMENT_ID" dbNotNull="false" dbPosition="5" dbSize="4" dbTypeName="NUMBER" inputType="number" javaName="departmentId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Department id" notNull="false" selected="true"/>
+            <fk name="JHIST_DEPT_FK">
+                <fkcol colname="DEPARTMENT_ID" colref="DEPARTMENT_ID" deferrable="7" deleterule="1" sequence="1" tablename="JOB_HISTORY" tableref="DEPARTMENTS" updaterule="0"/>
+            </fk>
+            <fk name="JHIST_EMP_FK">
+                <fkcol colname="EMPLOYEE_ID" colref="EMPLOYEE_ID" deferrable="7" deleterule="1" sequence="1" tablename="JOB_HISTORY" tableref="EMPLOYEES" updaterule="0"/>
+            </fk>
+            <fk name="JHIST_JOB_FK">
+                <fkcol colname="JOB_ID" colref="JOB_ID" deferrable="7" deleterule="1" sequence="1" tablename="JOB_HISTORY" tableref="JOBS" updaterule="0"/>
+            </fk>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="JHIST_EMP_FK" id="LINK_FK_JHIST_EMP_FK_O" inverseSideOf="" javaName="employees" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="JOB_HISTORY" targetEntity="Employees" targetTableName="EMPLOYEES" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="EMPLOYEE_ID" nullable="true" referencedColumnName="EMPLOYEE_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="JHIST_DEPT_FK" id="LINK_FK_JHIST_DEPT_FK_O" inverseSideOf="" javaName="departments" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="JOB_HISTORY" targetEntity="Departments" targetTableName="DEPARTMENTS" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="DEPARTMENT_ID" nullable="true" referencedColumnName="DEPARTMENT_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="JHIST_JOB_FK" id="LINK_FK_JHIST_JOB_FK_O" inverseSideOf="" javaName="jobs" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="JOB_HISTORY" targetEntity="Jobs" targetTableName="JOBS" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="JOB_ID" nullable="true" referencedColumnName="JOB_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+        </table>
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="Locations" name="LOCATIONS" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="LOCATION_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="4" dbTypeName="NUMBER" inputType="number" javaName="locationId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Location id" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="STREET_ADDRESS" dbNotNull="false" dbPosition="2" dbSize="40" dbTypeName="VARCHAR2" inputType="text" javaName="streetAddress" javaType="java.lang.String" jdbcTypeCode="12" label="Street address" maxLength="40" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="POSTAL_CODE" dbNotNull="false" dbPosition="3" dbSize="12" dbTypeName="VARCHAR2" inputType="text" javaName="postalCode" javaType="java.lang.String" jdbcTypeCode="12" label="Postal code" maxLength="12" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="CITY" dbNotNull="true" dbPosition="4" dbSize="30" dbTypeName="VARCHAR2" inputType="text" javaName="city" javaType="java.lang.String" jdbcTypeCode="12" label="City" maxLength="30" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="STATE_PROVINCE" dbNotNull="false" dbPosition="5" dbSize="25" dbTypeName="VARCHAR2" inputType="text" javaName="stateProvince" javaType="java.lang.String" jdbcTypeCode="12" label="State province" maxLength="25" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="COUNTRY_ID" dbNotNull="false" dbPosition="6" dbSize="2" dbTypeName="CHAR" inputType="text" javaName="countryId" javaType="java.lang.String" jdbcTypeCode="1" label="Country id" maxLength="2" notNull="false" selected="true"/>
+            <fk name="LOC_C_ID_FK">
+                <fkcol colname="COUNTRY_ID" colref="COUNTRY_ID" deferrable="7" deleterule="1" sequence="1" tablename="LOCATIONS" tableref="COUNTRIES" updaterule="0"/>
+            </fk>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="DEPT_LOC_FK" id="LINK_FK_DEPT_LOC_FK_I" inverseSideOf="LINK_FK_DEPT_LOC_FK_O" javaName="listOfDepartments" javaType="unused" joinTableName="" mappedBy="locations" optional="" owningSide="false" sourceTableName="LOCATIONS" targetEntity="Departments" targetTableName="DEPARTMENTS" used="true"/>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="LOC_C_ID_FK" id="LINK_FK_LOC_C_ID_FK_O" inverseSideOf="" javaName="countries" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="LOCATIONS" targetEntity="Countries" targetTableName="COUNTRIES" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="COUNTRY_ID" nullable="true" referencedColumnName="COUNTRY_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+        </table>
+        <table catalog="" databaseComment="" databaseType="TABLE" javaBean="Regions" name="REGIONS" schema="HR">
+            <column dbComment="" dbDefaultValue="" dbName="REGION_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="0" dbTypeName="NUMBER" inputType="number" javaName="regionId" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Region id" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="REGION_NAME" dbNotNull="false" dbPosition="2" dbSize="25" dbTypeName="VARCHAR2" inputType="text" javaName="regionName" javaType="java.lang.String" jdbcTypeCode="12" label="Region name" maxLength="25" notNull="false" selected="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="COUNTR_REG_FK" id="LINK_FK_COUNTR_REG_FK_I" inverseSideOf="LINK_FK_COUNTR_REG_FK_O" javaName="listOfCountries" javaType="unused" joinTableName="" mappedBy="regions" optional="" owningSide="false" sourceTableName="REGIONS" targetEntity="Countries" targetTableName="COUNTRIES" used="true"/>
+        </table>
+    </tableList>
+</root>

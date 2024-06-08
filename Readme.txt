@@ -1,0 +1,1 @@
+Sample project demonstrates using Telosys plugin in Spring Tool Suite to generate JPA entity classes mapped to database tables.

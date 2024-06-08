@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databases defaultId="1" maxId="10">
+    <db dialect="org.hibernate.dialect.Oracle10gDialect" driver="oracle.jdbc.driver.OracleDriver" id="0" isolationLevel="" name="HR" poolSize="1" typeName="Oracle" url="jdbc:oracle:thin:@localhost:1521:xe">
+        <property name="user" value="hr"/>
+        <property name="password" value="hr"/>
+        <metadata catalog="" schema="HR" table-name-exclude="" table-name-include="" table-name-pattern="%" table-types="TABLE"/>
+    </db>
+</databases>
